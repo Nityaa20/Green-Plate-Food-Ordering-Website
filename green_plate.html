@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenPlate | Sustainable Meals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    body.login-bg {
+      background: url("bg.jpg") center center / cover no-repeat fixed;
+    }
+
+    #logoIntro {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #f0f4f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #logoIntro img {
+      width: 180px;
+      animation: zoomIn 2s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    header {
+      background-color: #cde8d5;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #2b4d3c;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      display: none;
+    }
+
+    #loginSection {
+      max-width: 400px;
+      margin: 100px auto;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.92);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #loginSection input,
+    #loginSection button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    #loginSection input {
+      border: 1px solid #ccc;
+    }
+
+    #loginSection button {
+      background-color: SlateBlue;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #loginSection button:hover {
+      background-color: MediumSlateBlue;
+    }
+
+    .filters {
+      margin-bottom: 20px;
+    }
+
+    .filters button {
+      padding: 8px 14px;
+      margin-right: 10px;
+      border: none;
+      background-color: #b0dfc6;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .meal {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: #f9fefb;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .meal-details {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .meal-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-left: 20px;
+    }
+
+    .meal-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      margin-top: 5px;
+    }
+
+    .veg { background-color: green; }
+    .nonveg { background-color: red; }
+
+    .order-controls {
+      margin-top: 15px;
+    }
+
+    .order-controls button {
+      padding: 6px 12px;
+      margin: 0 5px;
+      background: #dbeee3;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #orderBtn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: SlateBlue;
+      color: white;
+      cursor: pointer;
+    }
+
+    #orderBtn:hover {
+      background-color: MediumSlateBlue;
+    }
+
+    #dashboardContent {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    #dashboardContent > div {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    #orderSummary ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #orderSummary li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    #backBtn {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #ccc;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: black;
+      color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+      .meal {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .meal-image {
+        margin: 10px 0 0 0;
+        width: 100%;
+        height: auto;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav a {
+        margin: 10px 10px 0 0;
+        display: inline-block;
+      }
+
+      #dashboardContent {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="logoIntro">
+    <img src="C:\Users\STUDENT\OneDrive\Desktop\green plate\logo.jpg" alt="GreenPlate Logo" />
+  </div>
+
+  <header>
+    <h1><img src="C:\Users\STUDENT\OneDrive\Desktop\green plate\logo.jpg" alt="Logo" /> GreenPlate</h1>
+    <nav>
+      <a onclick="showMenu()">Menu</a>
+      <a onclick="showDashboard()">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="loginSection">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="test@green.com" />
+      <input type="password" id="password" placeholder="1234" />
+      <button onclick="login()">Login</button>
+    </section>
+
+    <section id="mealCatalog">
+      <h2>Meal Catalog</h2>
+      <div class="filters">
+        <button onclick="filterMeals('all')">All</button>
+        <button onclick="filterMeals(true)">Veg</button>
+        <button onclick="filterMeals(false)">Non-Veg</button>
+      </div>
+      <div id="mealsList"></div>
+      <button id="orderBtn" onclick="placeOrder()">Place Order</button>
+    </section>
+
+    <section id="dashboard">
+      <h2 style="color: green;">DashBoard</h2>
+      <div id="dashboardContent">
+        <div>
+          <p><strong>CO₂ Saved:</strong> <span id="co2Saved">0</span> kg</p>
+          <button id="backBtn" onclick="showMenu()">← Back to Meals</button>
+        </div>
+        <div id="orderSummary">
+          <h3 style="color: brown;">Order Summary</h3>
+          <ul id="orderList"></ul>
+          <p><strong><font color=brown>Total Items:</strong> <span id="totalItems">0</span></p>
+          <p><strong><font color=brown>Total Amount:</strong> ₹<span id="totalAmount">0</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>&copy; 2025 GreenPlate. All rights reserved.</footer>
+
+  <script>
+    const sampleMeals = [
+      { name: "Aloo Gobi", price: 80, isVegan: true, img: "aloo.png" },
+      { name: "Butter Chicken", price: 150, isVegan: false, img: "butter.png" },
+      { name: "Chana Masala", price: 85, isVegan: true, img: "channa.png" },
+      { name: "Egg Curry", price: 90, isVegan: false, img: "egg.png" },
+      { name: "Fish Fry", price: 160, isVegan: false, img: "fish.png" },
+      { name: "Paneer Tikka", price: 120, isVegan: true, img: "tikka.png" },
+      { name: "Rajma Chawal", price: 100, isVegan: true, img: "rajma.png"},
+      { name: "Shrimp Biryani", price: 180, isVegan: false, img: "shrimp.png" },
+      { name: "Tofu Stir Fry", price: 110, isVegan: true, img: "aloo.png" },
+      { name: "Tandoori Chicken", price: 170, isVegan: false, img: "tandoori.png" }
+    ];
+
+    let orderList = [];
+    let currentFilter = 'all';
+
+    function renderMeals() {
+      const list = document.getElementById('mealsList');
+      list.innerHTML = '';
+      let meals = [...sampleMeals].sort((a, b) => a.name.localeCompare(b.name));
+      if (currentFilter !== 'all') {
+        meals = meals.filter(meal => meal.isVegan === currentFilter);
+      }
+
+      meals.forEach(meal => {
+        const existing = orderList.find(i => i.name === meal.name);
+        list.innerHTML += `
+          <div class="meal">
+            <div class="meal-details">
+              <strong>${meal.name}</strong><br>
+              <div class="meal-icon ${meal.isVegan ? 'veg' : 'nonveg'}"></div><br>
+              ₹${meal.price}
+              <div class="order-controls">
+                <button onclick="changeQty('${meal.name}', -1)">-</button>
+                <span>${existing ? existing.quantity : 0}</span>
+                <button onclick="changeQty('${meal.name}', 1)">+</button>
+              </div>
+            </div>
+            <img class="meal-image" src="${meal.img}" alt="${meal.name}" />
+          </div>
+        `;
+      });
+    }
+
+    function changeQty(name, delta) {
+      const meal = sampleMeals.find(m => m.name === name);
+      const index = orderList.findIndex(i => i.name === name);
+      if (index > -1) {
+        orderList[index].quantity += delta;
+        if (orderList[index].quantity <= 0) {
+          orderList.splice(index, 1);
+        }
+      } else if (delta > 0) {
+        orderList.push({ name: meal.name, price: meal.price, quantity: 1 });
+      }
+      renderMeals();
+    }
+
+    function placeOrder() {
+      document.getElementById('mealCatalog').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      updateOrderSummary();
+    }
+
+    function updateOrderSummary() {
+      const list = document.getElementById('orderList');
+      list.innerHTML = '';
+      let total = 0;
+      let items = 0;
+      orderList.forEach(order => {
+        const subtotal = order.quantity * order.price;
+        list.innerHTML += `<li>${order.name}: ₹${subtotal}</li>`;
+        total += subtotal;
+        items += order.quantity;
+      });
+      document.getElementById('totalAmount').textContent = total;
+      document.getElementById('totalItems').textContent = items;
+      document.getElementById('co2Saved').textContent = items * 2;
+    }
+
+    function filterMeals(type) {
+      currentFilter = type;
+      renderMeals();
+    }
+
+    function showMenu() {
+      document.querySelectorAll("section").forEach(s => s.style.display = 'none');
+      document.getElementById('mealCatalog').style.display = 'block';
+      renderMeals();
+    }
+
+    function showDashboard() {
+      document.querySelectorAll("section").forEach(s => s.style.display = 'none');
+      document.getElementById('dashboard').style.display = 'block';
+      updateOrderSummary();
+    }
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const pw = document.getElementById('password').value;
+      if (email === 'test@green.com' && pw === '1234') {
+        document.body.classList.remove('login-bg');
+        document.getElementById('loginSection').style.display = 'none';
+        showMenu();
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('logoIntro').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'block';
+        document.body.classList.add('login-bg');
+      }, 2500);
+    };
+  </script>
+</body>
+</html>
