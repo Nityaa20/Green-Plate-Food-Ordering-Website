@@ -2,7 +2,7 @@
 
 A full-stack restaurant ordering web application with login/register, menu browsing, cart management, order summary, and payment flow.
 
----
+
 
 ## 🚀 Quick Start
 
@@ -29,13 +29,13 @@ http://localhost:3000
 
 That's it! The database is created automatically on first run.
 
----
+
 
 ## 🧑‍💻 Demo Credentials
 
 You can register a new account, or use the app directly after registering.
 
----
+
 
 ## 📁 Project Structure
 
@@ -44,11 +44,9 @@ greenplate/
 ├── server.js              # Express backend (API + session auth)
 ├── package.json           # Dependencies
 ├── greenplate.db          # SQLite database (auto-created)
-├── db/
-│   ├── database.js        # Database helper (sql.js)
-│   └── menuData.js        # 36 curated menu items
-└── public/
-    └── index.html         # Full frontend SPA (single file)
+├── database.js        # Database helper (sql.js)
+└── menuData.js        # 36 curated menu items
+└── index.html         # Full frontend SPA (single file)
 ```
 
 ---
@@ -76,7 +74,7 @@ greenplate/
 - **users** table — id, name, email, password (hashed), phone, created_at
 - **orders** table — id, user_id, items (JSON), total, status, payment_method, address, carbon_saved, created_at
 
----
+
 
 ## 🎨 Design
 
@@ -85,7 +83,7 @@ greenplate/
 - **Aesthetic**: Luxury botanical — distinguished from Swiggy/Zomato's delivery-app look
 - **Fully responsive** — Works on mobile, tablet, desktop
 
----
+
 
 ## 🔧 Tech Stack
 
@@ -97,7 +95,7 @@ greenplate/
 | Database | SQLite (sql.js — pure JS, no native build) |
 | Fonts | Google Fonts (Cormorant Garamond, DM Sans) |
 
----
+
 
 ## 💡 Notes
 
